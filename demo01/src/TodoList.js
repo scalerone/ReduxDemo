@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css'
 import { Input , Button , List } from 'antd'
-
+import store from './store/index'
 const data=[
     '早8点开晨会，分配今天的开发工作',
     '早9点和项目经理作开发需求讨论会',
@@ -9,6 +9,13 @@ const data=[
 ]
 
 class TodoList extends Component {
+    constructor(props){
+        super(props)
+        //关键代码-----------start
+        this.state=store.getState();//getState()为store的接口方法
+        //关键代码-----------end
+        console.log(this.state)
+    }
     render() {
         return (
             <div style={{margin:'10px'}}>
@@ -19,7 +26,9 @@ class TodoList extends Component {
                 <div style={{margin:'10px',width:'300px'}}>
                     <List
                         bordered
-                        dataSource={data}
+                        //关键代码-----------start
+                        dataSource={this.state.list}
+                        //关键代码-----------end
                         renderItem={item=>(<List.Item>{item}</List.Item>)}
                     />
                 </div>
