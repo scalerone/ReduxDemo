@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css'
 import { Input , Button , List } from 'antd'
 import store from './store/index'
-
-import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM } from './store/actionTypes'
+//关键代码-------------start
+import {changeInputAction , addItemAction ,deleteItemAction} from './store/actionCreators'
+//关键代码------------end
 
 const data=[
     '早8点开晨会，分配今天的开发工作',
@@ -14,42 +15,31 @@ const data=[
 class TodoList extends Component {
     constructor(props){
         super(props)
-        //关键代码-----------start
         this.state=store.getState();//getState()为store的接口方法
         console.log(this.state)
-        //关键代码-----------end
         this.changeInputValue= this.changeInputValue.bind(this)
 
-        //----------关键代码-----------start
         this.storeChange = this.storeChange.bind(this)  //转变this指向
         this.clickBtn = this.clickBtn.bind(this)  //转变this指向
         store.subscribe(this.storeChange) //订阅Redux的状态 --让store变化的数据在组件中生效
-        //----------关键代码-----------end
     }
     storeChange(){
         this.setState(store.getState())
     }
+    //--------关键代码------start
     changeInputValue(e){
-        console.log(e.target.value)
-        const action ={
-            type:CHANGE_INPUT,
-            value:e.target.value
-        }
+        const action = changeInputAction(e.target.value)
         store.dispatch(action)
     }
     clickBtn(){
-        const action ={
-            type:ADD_ITEM
-        }
+        const action = addItemAction()
         store.dispatch(action)
     }
     deleteItem(index){
-        const action ={
-            type:DELETE_ITEM,
-            index
-        }
+        const action = deleteItemAction(index)
         store.dispatch(action)
     }
+    //--------关键代码------end
 
 
     render() {
