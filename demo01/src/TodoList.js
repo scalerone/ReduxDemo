@@ -40,6 +40,13 @@ class TodoList extends Component {
         }
         store.dispatch(action)
     }
+    deleteItem(index){
+        const action ={
+            type:'deleteItem',
+            index
+        }
+        store.dispatch(action)
+    }
 
 
     render() {
@@ -60,7 +67,8 @@ class TodoList extends Component {
                         //关键代码-----------start
                         dataSource={this.state.list}
                         //关键代码-----------end
-                        renderItem={item=>(<List.Item>{item}</List.Item>)}
+                        // renderItem={item=>(<List.Item>{item}</List.Item>)}
+                        renderItem={(item, index)=>(<List.Item onClick={this.deleteItem.bind(this,index)}>{item}</List.Item>)}
                     />
                 </div>
             </div>

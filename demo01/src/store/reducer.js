@@ -23,6 +23,12 @@ export default (state = defaultState,action)=>{  //就是一个方法函数
         return  newState
     }
 
+    if(action.type=='deleteItem'){
+        let newState = JSON.parse(JSON.stringify(state))
+        newState.list.splice(action.index,1)   //删除数组中对应的值
+        return  newState
+    }
+
 
     return state
 }
