@@ -19,6 +19,7 @@ class TodoList extends Component {
 
         //----------关键代码-----------start
         this.storeChange = this.storeChange.bind(this)  //转变this指向
+        this.clickBtn = this.clickBtn.bind(this)  //转变this指向
         store.subscribe(this.storeChange) //订阅Redux的状态 --让store变化的数据在组件中生效
         //----------关键代码-----------end
     }
@@ -33,16 +34,25 @@ class TodoList extends Component {
         }
         store.dispatch(action)
     }
+    clickBtn(){
+        const action ={
+            type:'addItem'
+        }
+        store.dispatch(action)
+    }
+
+
     render() {
         return (
             <div style={{margin:'10px'}}>
                 <div>
                     <Input placeholder={this.state.inputValue}
+                           value={this.state.inputValue}
                         //---------关键代码----start
                            onChange={this.changeInputValue}
                         //---------关键代码----end
                            style={{ width:'250px', marginRight:'10px'}}/>
-                    <Button type="primary">增加</Button>
+                    <Button type="primary" onClick={this.clickBtn}>增加</Button>
                 </div>
                 <div style={{margin:'10px',width:'300px'}}>
                     <List
