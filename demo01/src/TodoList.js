@@ -5,7 +5,7 @@ import TodoListUI from './TodoListUI'
 
 import store from './store/index'
 //关键代码-------------start
-import {changeInputAction , addItemAction ,deleteItemAction,getListAction} from './store/actionCreators'
+import {getTodoList,changeInputAction , addItemAction ,deleteItemAction,getListAction} from './store/actionCreators'
 //关键代码------------end
 
 const data=[
@@ -45,11 +45,14 @@ class TodoList extends Component {
     //--------关键代码------end
 
     componentDidMount(){
-        axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res)=>{
-            const data = res.data
-            const action = getListAction(data)
-            store.dispatch(action)
-        })
+        // axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res)=>{
+        //     const data = res.data
+        //     const action = getListAction(data)
+        //     store.dispatch(action)
+        // })
+        const action = getTodoList()
+        store.dispatch(action)
+
     }
 
 
