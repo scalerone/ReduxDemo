@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css'
 import { Input , Button , List } from 'antd'
-
-import TodoListUI from './TodoListUI'
-
 import store from './store/index'
 //关键代码-------------start
 import {changeInputAction , addItemAction ,deleteItemAction} from './store/actionCreators'
@@ -15,7 +12,7 @@ const data=[
     '晚5:30对今日代码进行review'
 ]
 
-class TodoList extends Component {
+class TodoListbak extends Component {
     constructor(props){
         super(props)
         this.state=store.getState();//getState()为store的接口方法
@@ -24,7 +21,6 @@ class TodoList extends Component {
 
         this.storeChange = this.storeChange.bind(this)  //转变this指向
         this.clickBtn = this.clickBtn.bind(this)  //转变this指向
-        this.deleteItem = this.deleteItem.bind(this)  //转变this指向
         store.subscribe(this.storeChange) //订阅Redux的状态 --让store变化的数据在组件中生效
     }
     storeChange(){
@@ -48,13 +44,27 @@ class TodoList extends Component {
 
     render() {
         return (
-            <TodoListUI
-                inputValue={this.state.inputValue}
-                list={this.state.list}
-                changeInputValue={this.changeInputValue}
-                clickBtn={this.clickBtn}
-                deleteItem={this.deleteItem}
-            />
+            <div style={{margin:'10px'}}>
+                <div>
+                    <Input placeholder={this.state.inputValue}
+                           value={this.state.inputValue}
+                        //---------关键代码----start
+                           onChange={this.changeInputValue}
+                        //---------关键代码----end
+                           style={{ width:'250px', marginRight:'10px'}}/>
+                    <Button type="primary" onClick={this.clickBtn}>增加</Button>
+                </div>
+                <div style={{margin:'10px',width:'300px'}}>
+                    <List
+                        bordered
+                        //关键代码-----------start
+                        dataSource={this.state.list}
+                        //关键代码-----------end
+                        // renderItem={item=>(<List.Item>{item}</List.Item>)}
+                        renderItem={(item, index)=>(<List.Item onClick={this.deleteItem.bind(this,index)}>{item}</List.Item>)}
+                    />
+                </div>
+            </div>
         );
     }
 }
