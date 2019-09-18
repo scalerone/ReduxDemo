@@ -1,6 +1,22 @@
-import { createStore } from 'redux'  // 编写创建store仓库 引入createStore方法
+import { createStore ,applyMiddleware,compose} from 'redux'  // 编写创建store仓库 引入createStore方法
 import reducer from './reducer'
-const store = createStore(reducer , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())          // 创建数据存储仓库
+import thunk from 'redux-thunk'
+// const store = createStore(
+//     reducer,
+//     applyMiddleware(thunk)
+// ) // 创建数据存储仓库
+
+// const store = createStore(reducer , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())          // 创建数据存储仓库
+//compose 为增强函数   为了引入thunk和调试，相当于两个函数都执行了
+const composeEnhancers =   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}):compose
+
+const enhancer = composeEnhancers(applyMiddleware(thunk))
+
+const store = createStore( reducer, enhancer) // 创建数据存储仓库
+
+
+
 export default store                 //暴露出去
 
 // 要遵循的原则
