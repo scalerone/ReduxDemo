@@ -1,21 +1,28 @@
 import { createStore ,applyMiddleware,compose} from 'redux'  // 编写创建store仓库 引入createStore方法
 import reducer from './reducer'
 import thunk from 'redux-thunk'
-// const store = createStore(
-//     reducer,
-//     applyMiddleware(thunk)
-// ) // 创建数据存储仓库
+//------关键代码----start-----------
+import createSagaMiddleware from 'redux-saga'
+import mySagas from './sagas'
+
+const sagaMiddleware = createSagaMiddleware();
+//------关键代码----end-----------
 
 // const store = createStore(reducer , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())          // 创建数据存储仓库
 //compose 为增强函数   为了引入thunk和调试，相当于两个函数都执行了
 const composeEnhancers =   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}):compose
 
-const enhancer = composeEnhancers(applyMiddleware(thunk))
+//引入redux-thunk
+// const enhancer = composeEnhancers(applyMiddleware(thunk))
+
+//替换redux-thunk引入saga中间件
+//------关键代码----start-----------
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware))
+//------关键代码----end-----------
 
 const store = createStore( reducer, enhancer) // 创建数据存储仓库
-
-
+sagaMiddleware.run(mySagas)
 
 export default store                 //暴露出去
 
