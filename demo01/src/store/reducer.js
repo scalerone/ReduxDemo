@@ -1,4 +1,4 @@
-import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM } from './actionTypes'
+import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM,GET_LIST } from './actionTypes'
 
 const defaultState = {
     inputValue : 'Write Something',
@@ -30,6 +30,13 @@ export default (state = defaultState,action)=>{  //就是一个方法函数
         newState.list.splice(action.index,1)   //删除数组中对应的值
         return  newState
     }
+    //----关键代码--------start --------
+    if(action.type === GET_LIST ){ //根据type值，编写业务逻辑
+        let newState = JSON.parse(JSON.stringify(state))
+        newState.list = action.data.data.list //复制性的List数组进去
+        return newState
+    }
+    //----关键代码--------en'd --------
 
 
     return state
