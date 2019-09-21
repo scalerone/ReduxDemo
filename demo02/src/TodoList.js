@@ -19,10 +19,16 @@ class TodoList extends Component {
                 <div>
 
                     <input value={this.props.inputValue} onChange={this.props.inputChange} />
-                <button>提交</button>
+                <button onClick={this.props.clickBtn}>提交</button>
                 </div>
                 <ul>
                     <li>Hello</li>
+
+                    {
+                        this.props.list.map((item,index)=>{
+                            return <li key={index}>{item}</li>
+                        })
+                    }
                 </ul>
             </div>
         );
@@ -34,13 +40,15 @@ connect-连接器用来将redux管理的state数据映射成UI组件的一般属
  */
 const stateToProps = (state)=>{
     return {
-        inputValue : state.inputValue
+        inputValue : state.inputValue,
+        list:state.list
     }
 }
 
 /*
 connect-连接器用来将redux管理的包含diaptch代码的函数映射成UI组件的函数属性的函数
 （如输入的onChange事件）
+可以写多个函数，用逗号隔开
  */
 const dispatchToProps = (dispatch) =>{
     return {
@@ -51,6 +59,11 @@ const dispatchToProps = (dispatch) =>{
                 type:'change_input',
                 value:e.target.value
             }
+            dispatch(action)
+        },
+        clickBtn(){
+
+            let action = {type:'add_item'}
             dispatch(action)
         }
     }
