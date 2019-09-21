@@ -11,13 +11,13 @@ import {connect} from 'react-redux'  //引入连接器
 //     }
 //
 //     render() {
-//         let {inputValue ,inputChange,clickBtn,list} = this.props;
+//         let {inputValue ,inputChange,clickButton,list} = this.props;
 //         return (
 //             <div>
 //                 <div>
 //
 //                     <input value={inputValue} onChange={inputChange} />
-//                 <button onClick={clickBtn}>提交</button>
+//                 <button onClick={clickButton}>提交</button>
 //                 </div>
 //                 <ul>
 //
@@ -82,7 +82,7 @@ const dispatchToProps = (dispatch) =>{
             }
             dispatch(action)
         },
-        clickBtn(){
+        clickButton(){
 
             let action = {type:'add_item'}
             dispatch(action)
