@@ -17,7 +17,7 @@ function* getList(){
     //     put(action)
 
     // })
-    const res = yield axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList')
+    const res = yield axios.get('https://www.easy-mock.com/mock/5d85942a325a296e8802b4f9/api/getList')
     const action = getListAction(res.data)
     yield put(action)
 }
