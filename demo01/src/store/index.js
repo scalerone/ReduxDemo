@@ -1,6 +1,8 @@
 import { createStore ,applyMiddleware,compose} from 'redux'  // 编写创建store仓库 引入createStore方法
 import reducer from './reducer'
 import thunk from 'redux-thunk'
+
+
 //------关键代码----start-----------
 import createSagaMiddleware from 'redux-saga'
 import mySagas from './sagas'

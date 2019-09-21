@@ -5,7 +5,7 @@ import TodoListUI from './TodoListUI'
 
 import store from './store/index'
 //关键代码-------------start
-import {getTodoList,changeInputAction , addItemAction ,deleteItemAction,getListAction} from './store/actionCreators'
+import {getTodoList,changeInputAction , addItemAction ,deleteItemAction,getListAction,getMyListAction} from './store/actionCreators'
 //关键代码------------end
 
 const data=[
@@ -50,7 +50,11 @@ class TodoList extends Component {
         //     const action = getListAction(data)
         //     store.dispatch(action)
         // })
-        const action = getTodoList()
+        //引入 redux-thunk后
+        // const action = getTodoList()
+        // store.dispatch(action)
+        //引入redux-sagas 中间件
+        const action =getMyListAction()
         store.dispatch(action)
 
     }
