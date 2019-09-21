@@ -5,6 +5,7 @@ class TodoList extends Component {
 
     constructor(props){
         super(props)
+        //获取store的数据给state
         this.state = store.getState()
     }
     render() {
