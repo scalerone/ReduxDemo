@@ -1,3 +1,5 @@
+import {CHANGEINPUT,ADDITEMS } from './action-types'
+
 const defalutState = {
     inputValue : 'wuxiaohui',
     list :[]
@@ -5,12 +7,12 @@ const defalutState = {
 
 
 export default (state = defalutState,action) =>{
-    if(action.type === 'change_input'){
+    if(action.type === CHANGEINPUT){
         let newState = JSON.parse(JSON.stringify(state))
         newState.inputValue = action.value
         return newState
     }
-    if(action.type === 'add_item'){
+    if(action.type === ADDITEMS){
         let newState = JSON.parse(JSON.stringify(state))
         newState.list.push(newState.inputValue)
         newState.inputValue = ''
