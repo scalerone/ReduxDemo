@@ -10,8 +10,11 @@ connect-连接器用来将redux管理的state数据映射成UI组件的一般属
  */
 const stateToProps = (state)=>{
     return {
-        inputValue : state.inputValue,
-        list:state.list
+        // inputValue : state.inputValue,
+        // list:state.list
+        //因为引入了immutable，state 已变为不可变对象只能调用get或set方法
+        inputValue : state.get('inputValue'),
+        list:state.get('list')
     }
 }
 

@@ -5,6 +5,7 @@ import React from "react";
  const TodoListUI =(props)=>{
     let {inputValue ,inputChange,clickButton,list} = props; // 粘贴过来后，此处要进行修改
     return (
+
         <div>
             <div>
                 <input value={inputValue} onChange={inputChange} />
