@@ -53,7 +53,7 @@ class TodoList extends Component {
         //引入 redux-thunk后
         // const action = getTodoList()
         // store.dispatch(action)
-        //引入redux-sagas 中间件
+        //引入redux-sagas
         const action =getMyListAction()
         store.dispatch(action)
 

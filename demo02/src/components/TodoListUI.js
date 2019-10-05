@@ -3,7 +3,7 @@
 import React from "react";
 
  const TodoListUI =(props)=>{
-    let {inputValue ,inputChange,clickButton,list} = props; // 粘贴过来后，此处要进行修改
+    let {inputValue ,inputChange,clickButton,list} = props; // 粘贴过来后，此处要进行修改,接收连接器传递的数据
     return (
 
         <div>
